@@ -3,41 +3,410 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Moderna</title>
+    <title>Calculadora Avançada</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="calculator">
-        <div class="display">
-            <div class="previous-operand" id="previous-operand"></div>
-            <div class="current-operand" id="current-operand">0</div>
-        </div>
-        <div class="buttons">
-            <button class="btn operator" data-action="clear">AC</button>
-            <button class="btn operator" data-action="delete">DEL</button>
-            <button class="btn operator" data-action="percent">%</button>
-            <button class="btn operator" data-action="divide">÷</button>
-            
-            <button class="btn number" data-number="7">7</button>
-            <button class="btn number" data-number="8">8</button>
-            <button class="btn number" data-number="9">9</button>
-            <button class="btn operator" data-action="multiply">×</button>
-            
-            <button class="btn number" data-number="4">4</button>
-            <button class="btn number" data-number="5">5</button>
-            <button class="btn number" data-number="6">6</button>
-            <button class="btn operator" data-action="subtract">−</button>
-            
-            <button class="btn number" data-number="1">1</button>
-            <button class="btn number" data-number="2">2</button>
-            <button class="btn number" data-number="3">3</button>
-            <button class="btn operator" data-action="add">+</button>
-            
-            <button class="btn number" data-number="0">0</button>
-            <button class="btn number" data-number=".">.</button>
-            <button class="btn equals" data-action="equals">=</button>
-        </div>
+    <div class="container">
+        <!-- Header com navegação -->
+        <header class="header">
+            <h1>Calculadora Avançada</h1>
+            <nav class="nav-tabs">
+                <button class="tab-btn active" data-tab="calculadora">Calculadora</button>
+                <button class="tab-btn" data-tab="basico">Básico</button>
+                <button class="tab-btn" data-tab="geometria">Geometria</button>
+                <button class="tab-btn" data-tab="porcentagem">Porcentagem</button>
+                <button class="tab-btn" data-tab="financeiro">Financeiro</button>
+                <button class="tab-btn" data-tab="estatistica">Estatística</button>
+            </nav>
+        </header>
+
+        <!-- Conteúdo principal -->
+        <main class="main-content">
+            <!-- Seção de cards -->
+            <section class="cards-section">
+                <!-- Tab Calculadora -->
+                <div class="tab-content active" id="calculadora">
+                    <div class="calculator-container">
+                        <div class="calculator">
+                            <div class="display">
+                                <div class="previous-operand" id="previous-operand"></div>
+                                <div class="current-operand" id="current-operand">0</div>
+                            </div>
+                            <div class="buttons">
+                                <button class="btn operator" data-action="clear">AC</button>
+                                <button class="btn operator" data-action="delete">DEL</button>
+                                <button class="btn operator" data-action="percent">%</button>
+                                <button class="btn operator" data-action="divide">÷</button>
+                                
+                                <button class="btn number" data-number="7">7</button>
+                                <button class="btn number" data-number="8">8</button>
+                                <button class="btn number" data-number="9">9</button>
+                                <button class="btn operator" data-action="multiply">×</button>
+                                
+                                <button class="btn number" data-number="4">4</button>
+                                <button class="btn number" data-number="5">5</button>
+                                <button class="btn number" data-number="6">6</button>
+                                <button class="btn operator" data-action="subtract">−</button>
+                                
+                                <button class="btn number" data-number="1">1</button>
+                                <button class="btn number" data-number="2">2</button>
+                                <button class="btn number" data-number="3">3</button>
+                                <button class="btn operator" data-action="add">+</button>
+                                
+                                <button class="btn number" data-number="0">0</button>
+                                <button class="btn number" data-number=".">.</button>
+                                <button class="btn equals" data-action="equals">=</button>
+                            </div>
+                        </div>
+                        <div class="calculator-actions">
+                            <button class="btn-save" onclick="salvarCalculadoraNoHistorico()">Salvar no Histórico</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Básico -->
+                <div class="tab-content" id="basico">
+                    <div class="cards-grid">
+                        <!-- Card Regra de Três -->
+                        <div class="card">
+                            <h3>Regra de Três</h3>
+                            <p class="description">Calcula proporções entre grandezas diretamente proporcionais.</p>
+                            <div class="input-group">
+                                <label>Valor 1:</label>
+                                <input type="number" id="regra-tres-valor1" placeholder="Ex: 10">
+                            </div>
+                            <div class="input-group">
+                                <label>Valor 2:</label>
+                                <input type="number" id="regra-tres-valor2" placeholder="Ex: 20">
+                            </div>
+                            <div class="input-group">
+                                <label>Valor 3:</label>
+                                <input type="number" id="regra-tres-valor3" placeholder="Ex: 15">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularRegraDeTres()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('regra-tres')">Limpar</button>
+                            </div>
+                            <div class="result" id="regra-tres-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Regra de Três', 'regra-tres')">Salvar no Histórico</button>
+                        </div>
+
+                        <!-- Card Velocidade Média -->
+                        <div class="card">
+                            <h3>Velocidade Média</h3>
+                            <p class="description">Calcula a velocidade média baseada na distância e tempo.</p>
+                            <div class="input-group">
+                                <label>Distância (km):</label>
+                                <input type="number" id="velocidade-distancia" placeholder="Ex: 100">
+                            </div>
+                            <div class="input-group">
+                                <label>Tempo (horas):</label>
+                                <input type="number" id="velocidade-tempo" placeholder="Ex: 2">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularVelocidadeMedia()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('velocidade')">Limpar</button>
+                            </div>
+                            <div class="result" id="velocidade-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Velocidade Média', 'velocidade')">Salvar no Histórico</button>
+                        </div>
+
+                        <!-- Card Consumo de Combustível -->
+                        <div class="card">
+                            <h3>Consumo de Combustível</h3>
+                            <p class="description">Calcula o consumo médio de combustível por km.</p>
+                            <div class="input-group">
+                                <label>Combustível (L):</label>
+                                <input type="number" id="consumo-litros" placeholder="Ex: 50">
+                            </div>
+                            <div class="input-group">
+                                <label>Distância (km):</label>
+                                <input type="number" id="consumo-distancia" placeholder="Ex: 500">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularConsumoCombustivel()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('consumo')">Limpar</button>
+                            </div>
+                            <div class="result" id="consumo-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Consumo de Combustível', 'consumo')">Salvar no Histórico</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Geometria -->
+                <div class="tab-content" id="geometria">
+                    <div class="cards-grid">
+                        <!-- Card Teorema de Pitágoras -->
+                        <div class="card">
+                            <h3>Teorema de Pitágoras</h3>
+                            <p class="description">Calcula o lado de um triângulo retângulo: a² + b² = c²</p>
+                            <div class="input-group">
+                                <label>Cateto A:</label>
+                                <input type="number" id="pitagoras-a" placeholder="Ex: 3">
+                            </div>
+                            <div class="input-group">
+                                <label>Cateto B:</label>
+                                <input type="number" id="pitagoras-b" placeholder="Ex: 4">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularPitagoras()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('pitagoras')">Limpar</button>
+                            </div>
+                            <div class="result" id="pitagoras-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Teorema de Pitágoras', 'pitagoras')">Salvar no Histórico</button>
+                        </div>
+
+                        <!-- Card Área do Triângulo -->
+                        <div class="card">
+                            <h3>Área do Triângulo</h3>
+                            <p class="description">Calcula a área usando base e altura: A = (b × h) / 2</p>
+                            <div class="input-group">
+                                <label>Base:</label>
+                                <input type="number" id="triangulo-base" placeholder="Ex: 10">
+                            </div>
+                            <div class="input-group">
+                                <label>Altura:</label>
+                                <input type="number" id="triangulo-altura" placeholder="Ex: 8">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularAreaTriangulo()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('triangulo')">Limpar</button>
+                            </div>
+                            <div class="result" id="triangulo-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Área do Triângulo', 'triangulo')">Salvar no Histórico</button>
+                        </div>
+
+                        <!-- Card Área do Círculo -->
+                        <div class="card">
+                            <h3>Área do Círculo</h3>
+                            <p class="description">Calcula a área usando o raio: A = π × r²</p>
+                            <div class="input-group">
+                                <label>Raio:</label>
+                                <input type="number" id="circulo-raio" placeholder="Ex: 5">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularAreaCirculo()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('circulo')">Limpar</button>
+                            </div>
+                            <div class="result" id="circulo-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Área do Círculo', 'circulo')">Salvar no Histórico</button>
+                        </div>
+
+                        <!-- Card Circunferência -->
+                        <div class="card">
+                            <h3>Circunferência</h3>
+                            <p class="description">Calcula o perímetro do círculo: C = 2 × π × r</p>
+                            <div class="input-group">
+                                <label>Raio:</label>
+                                <input type="number" id="circunferencia-raio" placeholder="Ex: 5">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularCircunferencia()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('circunferencia')">Limpar</button>
+                            </div>
+                            <div class="result" id="circunferencia-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Circunferência', 'circunferencia')">Salvar no Histórico</button>
+                        </div>
+
+                        <!-- Card Área do Retângulo/Quadrado -->
+                        <div class="card">
+                            <h3>Área do Retângulo/Quadrado</h3>
+                            <p class="description">Calcula a área: A = base × altura</p>
+                            <div class="input-group">
+                                <label>Base:</label>
+                                <input type="number" id="retangulo-base" placeholder="Ex: 10">
+                            </div>
+                            <div class="input-group">
+                                <label>Altura:</label>
+                                <input type="number" id="retangulo-altura" placeholder="Ex: 8">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularAreaRetangulo()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('retangulo')">Limpar</button>
+                            </div>
+                            <div class="result" id="retangulo-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Área do Retângulo', 'retangulo')">Salvar no Histórico</button>
+                        </div>
+
+                        <!-- Card Volume do Cubo/Paralelepípedo -->
+                        <div class="card">
+                            <h3>Volume do Cubo/Paralelepípedo</h3>
+                            <p class="description">Calcula o volume: V = comprimento × largura × altura</p>
+                            <div class="input-group">
+                                <label>Comprimento:</label>
+                                <input type="number" id="volume-comprimento" placeholder="Ex: 5">
+                            </div>
+                            <div class="input-group">
+                                <label>Largura:</label>
+                                <input type="number" id="volume-largura" placeholder="Ex: 3">
+                            </div>
+                            <div class="input-group">
+                                <label>Altura:</label>
+                                <input type="number" id="volume-altura" placeholder="Ex: 2">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularVolumeParalelepipedo()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('volume')">Limpar</button>
+                            </div>
+                            <div class="result" id="volume-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Volume do Paralelepípedo', 'volume')">Salvar no Histórico</button>
+                        </div>
+
+                        <!-- Card Volume da Esfera -->
+                        <div class="card">
+                            <h3>Volume da Esfera</h3>
+                            <p class="description">Calcula o volume: V = (4/3) × π × r³</p>
+                            <div class="input-group">
+                                <label>Raio:</label>
+                                <input type="number" id="esfera-raio" placeholder="Ex: 5">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularVolumeEsfera()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('esfera')">Limpar</button>
+                            </div>
+                            <div class="result" id="esfera-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Volume da Esfera', 'esfera')">Salvar no Histórico</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Porcentagem -->
+                <div class="tab-content" id="porcentagem">
+                    <div class="cards-grid">
+                        <!-- Card Porcentagem -->
+                        <div class="card">
+                            <h3>Porcentagem</h3>
+                            <p class="description">Calcula X% de um valor.</p>
+                            <div class="input-group">
+                                <label>Valor:</label>
+                                <input type="number" id="porcentagem-valor" placeholder="Ex: 100">
+                            </div>
+                            <div class="input-group">
+                                <label>Porcentagem (%):</label>
+                                <input type="number" id="porcentagem-percentual" placeholder="Ex: 15">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularPorcentagem()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('porcentagem')">Limpar</button>
+                            </div>
+                            <div class="result" id="porcentagem-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Porcentagem', 'porcentagem')">Salvar no Histórico</button>
+                        </div>
+
+                        <!-- Card Variação Percentual -->
+                        <div class="card">
+                            <h3>Variação Percentual</h3>
+                            <p class="description">Calcula a variação percentual entre dois valores.</p>
+                            <div class="input-group">
+                                <label>Valor Inicial:</label>
+                                <input type="number" id="variacao-inicial" placeholder="Ex: 100">
+                            </div>
+                            <div class="input-group">
+                                <label>Valor Final:</label>
+                                <input type="number" id="variacao-final" placeholder="Ex: 120">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularVariacaoPercentual()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('variacao')">Limpar</button>
+                            </div>
+                            <div class="result" id="variacao-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Variação Percentual', 'variacao')">Salvar no Histórico</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Financeiro -->
+                <div class="tab-content" id="financeiro">
+                    <div class="cards-grid">
+                        <!-- Card Juros Simples -->
+                        <div class="card">
+                            <h3>Juros Simples</h3>
+                            <p class="description">Calcula juros simples: J = C × i × t</p>
+                            <div class="input-group">
+                                <label>Capital (R$):</label>
+                                <input type="number" id="juros-simples-capital" placeholder="Ex: 1000">
+                            </div>
+                            <div class="input-group">
+                                <label>Taxa (% ao mês):</label>
+                                <input type="number" id="juros-simples-taxa" placeholder="Ex: 2">
+                            </div>
+                            <div class="input-group">
+                                <label>Tempo (meses):</label>
+                                <input type="number" id="juros-simples-tempo" placeholder="Ex: 12">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularJurosSimples()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('juros-simples')">Limpar</button>
+                            </div>
+                            <div class="result" id="juros-simples-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Juros Simples', 'juros-simples')">Salvar no Histórico</button>
+                        </div>
+
+                        <!-- Card Juros Compostos -->
+                        <div class="card">
+                            <h3>Juros Compostos</h3>
+                            <p class="description">Calcula montante com juros compostos: M = C × (1 + i)ᵗ</p>
+                            <div class="input-group">
+                                <label>Capital (R$):</label>
+                                <input type="number" id="juros-compostos-capital" placeholder="Ex: 1000">
+                            </div>
+                            <div class="input-group">
+                                <label>Taxa (% ao mês):</label>
+                                <input type="number" id="juros-compostos-taxa" placeholder="Ex: 1">
+                            </div>
+                            <div class="input-group">
+                                <label>Tempo (meses):</label>
+                                <input type="number" id="juros-compostos-tempo" placeholder="Ex: 12">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularJurosCompostos()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('juros-compostos')">Limpar</button>
+                            </div>
+                            <div class="result" id="juros-compostos-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Juros Compostos', 'juros-compostos')">Salvar no Histórico</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Estatística -->
+                <div class="tab-content" id="estatistica">
+                    <div class="cards-grid">
+                        <!-- Card Média Aritmética -->
+                        <div class="card">
+                            <h3>Média Aritmética</h3>
+                            <p class="description">Calcula a média de uma lista de números.</p>
+                            <div class="input-group">
+                                <label>Números (separados por vírgula):</label>
+                                <input type="text" id="media-numeros" placeholder="Ex: 10, 20, 30, 40, 50">
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-calculate" onclick="calcularMediaAritmetica()">Calcular</button>
+                                <button class="btn-clear-card" onclick="limparCard('media')">Limpar</button>
+                            </div>
+                            <div class="result" id="media-resultado"></div>
+                            <button class="btn-save" onclick="salvarNoHistorico('Média Aritmética', 'media')">Salvar no Histórico</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Painel de histórico -->
+            <aside class="history-panel">
+                <div class="history-header">
+                    <h3>Histórico de Cálculos</h3>
+                    <div class="history-actions">
+                        <button class="btn-clear-history" onclick="limparHistorico()">Limpar</button>
+                        <button class="btn-clear-all" onclick="limparTodasOperacoes()">Limpar Tudo</button>
+                    </div>
+                </div>
+                <div class="history-list" id="history-list">
+                    <!-- Histórico será preenchido dinamicamente -->
+                </div>
+            </aside>
+        </main>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
